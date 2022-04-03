@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { parseMinutes } from '../utils/datetime';
+import { Button, Select } from 'antd';
+import { useDispatch } from "react-redux";
+
+const { Option } = Select;
 
 const AddTodo = ({ shouldShowForm, insertTodo, children }) => {
+    const dispatch = useDispatch();
+
     const [newTodoTitle, setNewTodoTitle] = useState('');
     const [newTodoDescription, setNewTodoDescription] = useState('');
 
@@ -9,21 +15,35 @@ const AddTodo = ({ shouldShowForm, insertTodo, children }) => {
 
     const addTodo = event => {
         event.preventDefault();
-        insertTodo({ title: newTodoTitle, description: newTodoDescription })
+        insertTodo({ title: newTodoTitle, description: newTodoDescription });
+    
     };
 
     return (
         <>
             {children}
-            {shouldShowForm && <form onSubmit={e => addTodo(e)}>
-                <label htmlFor='title'></label>
-                <input id='title' type='text' onChange={(event) => setNewTodoTitle(event.target.value)} />
+            {shouldShowForm && <form>
+                <div style={{ display: 'flex', flexDirection: 'column', width: 300 }}>
+                    <label htmlFor='title'></label>
+                    <input id='title' type='text' onChange={(event) => setNewTodoTitle(event.target.value)} />
 
-                <label htmlFor='description'></label>
-                <input id='description' type='description' onChange={(event) => setNewTodoDescription(event.target.value)} />
+                    <label htmlFor='description'></label>
+                    <input id='description' type='description' onChange={(event) => setNewTodoDescription(event.target.value)} />
 
-                <button type="submit">Add</button>
+                    {/* <button type="submit">Add</button> */}
 
+
+                    <Select>
+                        <Option value="tomer">Tomer</Option>
+                        <Option value="eugene">Eugene</Option>
+                        <Option value="noa">Noa</Option>
+                    </Select>
+                </div>
+                {/* <Button type="primary" htmlType="submit" size="large"> */}
+                <button type="button" onClick={addTodo}>
+                    Add
+                    </button>
+                {/* </Button> */}
                 <p>
                     {newTodoTitle}
                 </p>
