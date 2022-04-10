@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { parseMinutes } from '../utils/datetime';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+    background-color: ${props => props.danger ? 'red' : 'white'};  
+`;
 
 const AddTodo = ({ shouldShowForm, insertTodo, children }) => {
     const [newTodoTitle, setNewTodoTitle] = useState('');
@@ -22,7 +27,7 @@ const AddTodo = ({ shouldShowForm, insertTodo, children }) => {
                 <label htmlFor='description'></label>
                 <input id='description' type='description' onChange={(event) => setNewTodoDescription(event.target.value)} />
 
-                <button type="submit">Add</button>
+                <StyledButton danger type="submit">Add</StyledButton>
 
                 <p>
                     {newTodoTitle}

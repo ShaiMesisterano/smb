@@ -1,4 +1,4 @@
-
+import StyledWrapper from './StyledWrapper';
 
 function Template({children}) {
     return children;
@@ -18,9 +18,9 @@ Template.Header = function({children}) {
 
 Template.Content = function({children}) {
     return (
-        <>
+        <StyledWrapper>
         {children}
-        </>
+        </StyledWrapper>
     )
 }
 

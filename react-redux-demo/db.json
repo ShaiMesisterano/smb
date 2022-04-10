@@ -1,0 +1,42 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "learn react",
+      "description": "fun, fun, fun",
+      "assignee": "tomer"
+    },
+    {
+      "id": 2,
+      "title": "have a dessert",
+      "description": "chocolate",
+      "assignee": "eugene"
+    },
+    {
+      "id": 3,
+      "title": "have a sleep",
+      "description": "after the dessert",
+      "assignee": "noa"
+    },
+    {
+      "id": 4
+    }
+  ],
+  "assignees": [
+    {
+      "id": "tomer",
+      "name": "tomer",
+      "role": "CEO"
+    },
+    {
+      "id": "eugene",
+      "name": "eugene",
+      "role": "CTO"
+    },
+    {
+      "id": "noa",
+      "name": "noa",
+      "role": "COO"
+    }
+  ]
+}

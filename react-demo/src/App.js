@@ -1,54 +1,54 @@
-import { useState } from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import AddTodo from "./components/AddTodo";
 import Template from './components/Template';
+import TodoList from './components/TodoList';
+import {addTodo} from './slices/todo';
+import {ThemeProvider} from "styled-components";
+
+const lightTheme = {
+    backgroundColor: 'lightblue',
+    fontSize: 14
+}
+
+const darkTheme = {
+    backgroundColor: 'darkgray',
+    fontSize: 12
+}
 
 const Todos = () => {
-  const [todos, setTodos] = useState([
-    { title: 'learn react', description: 'fun, fun, fun' },
-    { title: 'have a dessert', description: 'chocolate' },
-    { title: 'have a sleep', description: 'after the dessert' },
-  ]);
+    const todos = useSelector(state => state.todo);
+    const dispatch = useDispatch();
+    const [mode, setMode] = useState('light');
 
-  const insertTodo = (props) => {
-    setTodos((lastState) => [...lastState, props]);
-  }
+    const insertTodo = (props) => {
+        dispatch(addTodo(props));
+    }
 
-  return (
-    <>
-      <h1>{"Todos".toLocaleLowerCase()}</h1>
-      {/* <header>
-        header
-        <ul>
-          <li>list 1</li>
-          <li>list 2</li>
-        </ul>
-      </header> */}
+    return (
+        <ThemeProvider theme={mode === 'light' ? lightTheme : darkTheme}>
+            <button onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>Color Mode</button>
+            <h1>{"Todos".toLocaleLowerCase()}</h1>
 
-      <Template.Header>
-        Page 1
-      </Template.Header>
+            <Template.Header>
+                Page 1
+            </Template.Header>
 
-      <Template.Content>
-        <ul>
-          {todos.map(({ title, description }, i) => <li key={i}>{title}: {description}</li>)}
-        </ul>
-        <AddTodo shouldShowForm={true} insertTodo={insertTodo}>
-          <h1>Add New</h1>
-        </AddTodo>
+            <Template.Content>
+                <div style={{display: 'flex'}}>
+                    <TodoList todos={todos || []}/>
+                </div>
+                <AddTodo shouldShowForm={true} insertTodo={insertTodo}>
+                    <h1>Add New</h1>
+                </AddTodo>
 
-      </Template.Content>
+            </Template.Content>
 
-
-
-      {/* <footer>
-        All rights reserved
-      </footer> */}
-
-      <Template.Footer>
-        All rights reserved
-      </Template.Footer>
-    </>
-  )
+            <Template.Footer>
+                All rights reserved
+            </Template.Footer>
+        </ThemeProvider>
+    )
 }
 
 export default Todos;
